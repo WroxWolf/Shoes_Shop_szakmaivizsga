@@ -1,0 +1,343 @@
+<template>
+  <div>
+    <div class="my-Title">
+      <h1>{{ title }} </h1>
+      <button
+        class="btn bg-dark btn-outline-light btn-sm my-ctrl-btn"
+        @click="onClickedInsert()"
+        >
+          <i class="bi bi-plus"></i>
+      </button>
+      <button
+        class="btn bg-dark btn-outline-light btn-sm my-ctrl-btn"
+        @click="onClickedRefresh()"
+        >
+        <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped my-table-fit">
+        <thead class="tabl-dark">
+
+          <!-- Fejléc -->
+          <th v-for="(column, columnKey, indexH) in columns" :key="indexH"
+          :class="{
+           'd-none': indexH == 0
+            }"
+          >
+            {{ column }}
+          </th>
+        </thead>
+
+        <tbody>
+          <!-- Adatsorok -->
+          <tr v-for="(row, indexR) in rows" :key="indexR">
+
+            <!-- adatcellák (oszlopok) -->
+            <td @click="onClickedUpdate(row)" v-for="(cell, key, indexD) in row" :key="indexD"
+            :class="{
+              'd-none': indexD == 0
+            }"
+            >{{ cell }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              {{ modalTitle }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              @click="formCancel()"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- űrlap -->
+            <div class="modal-body">
+              <form class="row g-3 needs-validation" novalidate>
+                <!-- Tipus -->
+                <div class="col-md-6">
+                  <label for="Tipus" class="form-label">Tipus</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="Tipus"
+                    v-model="row.Tipus"
+                    required
+                  />
+                  <div class="invalid-feedback">Kötelező!</div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+             <button
+                class="btn"
+                @click="onClickedDelete(row)"
+              >
+                <i class="my-modalButton bi bi-trash-fill"></i>
+              </button>
+            <button type="button" class="btn" @click="formSave()">
+              <i class="my-modalButton bi bi-save2-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+const axios = require("axios").default;
+const bootstrap = require("bootstrap");
+
+class Tipus {
+  constructor(TipusId,Tipus) {
+        this.TipusId = TipusId;
+        this.Tipus = Tipus;
+  }
+}
+
+export default {
+  name: "Tipusok",
+  data() {
+    return {
+      queryGet: "TipusTabla",
+      title: null,
+      columns: [],
+      rows: [],
+      //Rowok
+      TipusRow: [],
+      SzinRow: [],
+      MarkaRow: [],
+
+      resData: null,
+      row: new Tipus(0, null),
+      //Ürlap
+      modalTitle: null,
+      status: null,
+
+      myModal: null,
+      modalX: null,
+      form: null,
+    };
+  },
+  created() {
+    this.getRows();
+    this.getTipusok();
+  },
+  // oldal betötlődés után
+  mounted() {
+    //modal
+    this.myModal = document.getElementById("myModal");
+    this.modalX = new bootstrap.Modal(this.myModal);
+
+    //űrlap validációhoz
+    this.form = document.querySelector(".needs-validation");
+  },
+  methods: {
+    getRows() {
+      //ajax kérés (get)
+      axios
+        .get(this.url, {
+          params: {
+            query: this.queryGet,
+          },
+        })
+        .then((res) => {
+          this.resData = res.data;
+          this.title = this.resData.title;
+          this.columns = this.resData.columns;
+          this.rows = this.resData.rows;
+          console.log("Title:", this.title);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getTipusok(){
+      axios
+        .get(this.url, {
+          params: {
+            query: this.queryGet,
+          },
+        })
+        .then((res) => {
+          this.resData = res.data;
+          this.TipusRow = this.resData.rows;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteRow(id) {
+      console.log(id);
+      //post
+      let params = {
+        query: "TipusDeleteById",
+        TipusId: id,
+      };
+      axios
+        .post(this.url, params)
+        .then(() => {
+          this.getRows();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    updateRow() {
+      //post
+      let params = {
+        query: "TipusUpdateById",
+        Tipus: this.row.Tipus,
+        TipusId: this.row.TipusId,
+      };
+      axios
+        .post(this.url, params)
+        .then((res) => {
+          console.log(res);
+          this.getRows();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    insertRow() {
+      //post
+      let params = {
+        query: "TipusInsert",
+        Tipus: this.row.Tipus,
+      };
+      axios
+        .post(this.url, params)
+        .then(() => {
+          this.getRows();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    onClickedDelete(row) {
+      this.status = "delete";
+      let id = row.TipusId;
+      if (confirm("Töröljem?")) {
+        this.deleteRow(id);
+      }
+      this.modalX.hide();
+    },
+    onClickedUpdate(row) {
+      this.modalTitle = "Adat módosítás";
+      this.status = "update"
+      this.row = { ...row };
+
+      //űrlap indit
+      this.formShow();
+      // this.row =row;
+    },
+    onClickedInsert() {
+      this.modalTitle = "új tipus bevitele";
+      this.status = "insert"
+      this.row = new Tipus(0, null);
+
+      this.formShow();
+      //Hozzáadja az új sort
+      //this.insertRow();
+    },
+    onClickedRefresh() {
+      this.status = "refresh";
+      this.getRows();
+    },
+    // Űrlap kezelés
+    formCancel() {
+      this.modalX.hide();
+    },
+    formShow() {
+      this.modalX.show();
+    },
+    formSave() {
+      this.form.classList.add("was-validated");
+      if (this.form.checkValidity()) {
+        //űrlap adatkezelés
+        if (this.status == "insert") {
+          this.insertRow();
+        } else if (this.status == "update") {
+          this.updateRow();
+        }
+
+        //Űrlap bezár
+        this.modalX.hide();
+      } else {
+        return;
+      }
+    },
+  },
+};
+</script>
+
+<style>
+.my-ctrl-btn {
+  padding: 0 1px !important;
+  margin: 0 2px;
+  width: 25px;
+  height: 25px;
+}
+.my-hide{
+  display: none;
+}
+.my-modalButton{
+  font-size: 30px;
+}
+.my-Title{
+  text-align: center;
+  border-bottom:2px solid black;
+  padding: 10px;
+}
+@media(max-width:1024px){
+  .table thead{
+    display: none;
+  }
+  .table, .table tbody, .table tr, .table td{
+    display: block;
+    width: 100%;
+  }
+  .table tr{
+    margin-bottom: 15px;
+  }
+  .table td{
+    text-align: left;
+    text-align: left;
+    position: relative;
+  }
+  /* .table td::before{
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding: 15px;
+    font-size: 15px;
+    text-align: center;
+  } */
+}
+tr:hover{
+  background-color: rgb(228, 225, 225);
+  cursor: pointer;
+}
+</style>

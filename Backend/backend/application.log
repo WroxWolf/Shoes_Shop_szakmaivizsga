@@ -1,0 +1,26 @@
+[ERROR] connectin error: Unknown database 'autoberlesx'
+[ERROR] query error: 
+[ERROR] query error: Query was empty
+[ERROR] query error: Query was empty
+[ERROR] query error: Unknown column 'autoId' in 'field list'
+[ERROR] query error: Unknown column 'autoId' in 'field list'
+[ERROR] query error: Unknown column 'autoId' in 'field list'
+[ERROR] query error: Unknown column 'autoId' in 'field list'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'c.MeretId' in 'on clause'
+[ERROR] query error: Unknown column 'm.MeretId' in 'field list'
+[ERROR] query error: Unknown column 'm.MeretId' in 'field list'
+[ERROR] query error: Unknown column 'MeretId' in 'field list'
+[ERROR] query error: Unknown column 'Id' in 'where clause'
+[ERROR] query error: Unknown column 'Id' in 'where clause'
+[ERROR] query error: Unknown column 'Id' in 'where clause'
+[ERROR] query error: Unknown column 'Id' in 'where clause'
+[ERROR] query error: Unknown column 'MeretId' in 'where clause'
+[ERROR] query error: Unknown column 'MeretId' in 'where clause'
+[ERROR] query error: Table 'ciposhop.meret' doesn't exist
+[ERROR] query error: Unknown column 'c.MeretId' in 'field list'
+[ERROR] query error: Unknown column 'Id' in 'where clause'
