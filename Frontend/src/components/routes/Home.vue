@@ -1,39 +1,15 @@
 <template>
-  <div class="home-page">
-    <div
-      id="carouselExampleFade"
-      class="carousel slide carousel-fade"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="@/assets/Artego_sportcipo_feher.png" class="d-block w-100" alt="" />
-        </div>
-        <div class="carousel-item">
-          <img src="@/assets/Kalenji_sportcipo_narancssarga.png" class="d-block w-100" alt="" />
-        </div>
-        <div class="carousel-item">
-          <img src="@/assets/Quechua_bakancs_fekete.png" class="d-block w-100" alt="" />
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+          <img src="../../assets/undraw_welcome_3gvl.png" alt="">
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleFade"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      <div class="col-2 text-left">
+        <h1 class="text-center">Üdvözlöm</h1>
+        <p class="motto">Nehéz elképzelni a városi stílust sportcipő nélkül.
+            A cipők számos színváltozata közül választhat.</p>
+            <p class="motto">Ingyenes szállítás 40 000 Ft felett. Stílusok: Elegáns, Modern, Fényűző, Sportos, Szabadidő, Trendi, Egyedi.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -45,8 +21,28 @@ export default {
 </script>
 
 <style>
-.home-page{
-  max-width: 1200px;
-  margin:auto auto;
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+h1{
+  font-family: 'Pacifico', cursive;
+}
+.motto{
+  font-weight:bold;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5rem;
+  margin-left: 35px;
+}
+.row{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.col-2{
+  flex-basis: 50%;
+  min-width: 300px;
+}
+.col-2 img{
+  max-width: 100%;
+  padding: 50px 0;
 }
 </style>

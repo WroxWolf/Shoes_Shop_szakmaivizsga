@@ -23,11 +23,8 @@
           <li><router-link class="dropdown-item" to="/TipusTabla/">Tipus tábla</router-link></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cégről</a>
-        </li>
         <li v-if="loginAccessLevel>0" class="nav-item">
-          <a class="nav-link" href="#"><i class="bi bi-cart"></i><sup class="sup">0</sup></a>
+          <router-link class="nav-link" to="/Kosar/"><i class="bi bi-cart"></i><sup class="sup">0</sup></router-link>
         </li>
         <li class="nav-item dropdown">
           <!-- <router-link class="nav-link" to="/Felhasznalo/"></router-link> -->

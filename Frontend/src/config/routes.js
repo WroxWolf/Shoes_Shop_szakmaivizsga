@@ -7,6 +7,7 @@ import MeretTabla from "../components/routes/MeretTabla.vue";
 import SzinTabla from "../components/routes/SzinTabla.vue";
 import TipusTabla from "../components/routes/TipusTabla.vue";
 import Felhasznalo from "../components/routes/Felhasznalo.vue";
+import Kosar from "../components/routes/Kosar.vue";
 
 const routes =[
     {
@@ -53,6 +54,11 @@ const routes =[
         name: "felhasznalo",
         path: "/Felhasznalo/",
         component: Felhasznalo
+    },
+    {
+        name: "kosar",
+        path: "/Kosar/",
+        component: Kosar
     },
 ];
 
