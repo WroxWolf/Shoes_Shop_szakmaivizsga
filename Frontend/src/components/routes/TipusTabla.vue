@@ -326,15 +326,6 @@ export default {
     text-align: left;
     position: relative;
   }
-  /* .table td::before{
-    content: attr(data-label);
-    position: absolute;
-    left: 0;
-    width: 50%;
-    padding: 15px;
-    font-size: 15px;
-    text-align: center;
-  } */
 }
 tr:hover{
   background-color: rgb(228, 225, 225);

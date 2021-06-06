@@ -126,7 +126,7 @@ export default {
         });
     },
     getPicture(kep) {
-      console.log(kep);
+      //console.log(kep);
       
       try {
         return kep ? require("@/assets/" + kep) : "";

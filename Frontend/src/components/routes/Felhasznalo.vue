@@ -63,7 +63,7 @@
 
             <div class="text-center mb-5" style="color: #777">
               Nincs fiokja?
-              <a class="register-link" href="register.html"
+              <a class="register-link" href="#"
                 >Regisztráljon most!!</a
               >
             </div>
@@ -177,14 +177,14 @@ export default {
     border: none;
     cursor: pointer;
     border-radius: 20px;
-    background: linear-gradient(45deg, #000000, #5c5c5d);   /*Button Color*/
+    background: linear-gradient(45deg, #000000, #5c5c5d);  
     color: #fff;
     font-weight: bold;
     transition: 0.5s;
 }
 
 .infinity-form button[type="submit"]:hover {
-    background: linear-gradient(45deg, #5c5c5d, #000000);   /*Button color when hover*/
+    background: linear-gradient(45deg, #5c5c5d, #000000); 
 }
 
 .forget-link , .login-link , .register-link {

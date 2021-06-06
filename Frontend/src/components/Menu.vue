@@ -27,7 +27,6 @@
           <router-link class="nav-link" to="/Kosar/"><i class="bi bi-cart"></i><sup class="sup">0</sup></router-link>
         </li>
         <li class="nav-item dropdown">
-          <!-- <router-link class="nav-link" to="/Felhasznalo/"></router-link> -->
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle"></i>
           </a>
